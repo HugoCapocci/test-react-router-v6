@@ -9,7 +9,14 @@ import {
 } from "../contacts";
 
 export async function contactLoader({ params }) {
-  return getContact(params.contactId);
+  const contact = await getContact(params.contactId);
+  if (!contact) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  return contact;
 }
 
 export async function favoriteAction({ request, params }) {
