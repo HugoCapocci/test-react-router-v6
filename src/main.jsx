@@ -7,21 +7,28 @@ import {
 
 import Root, { rootLoader, rootAction } from './routes/root';
 import Contact, { contactLoader } from './routes/contact';
-import ErrorPage from "./error-page";
+import EditContact, { editAction } from './routes/edit';
+import ErrorPage from './error-page';
 import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
     loader: rootLoader,
     action: rootAction,
     children: [
       {
-        path: "contacts/:contactId",
+        path: 'contacts/:contactId',
         element: <Contact />,
         loader: contactLoader
+      },
+      {
+        path: "contacts/:contactId/edit",
+        element: <EditContact />,
+        loader: contactLoader,
+        action: editAction,
       },
     ]
   }

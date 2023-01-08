@@ -3,6 +3,7 @@ import {
   Link,
   useLoaderData,
   Form,
+  redirect,
 } from "react-router-dom";
 
 import { getContacts, createContact } from "../contacts";
@@ -14,7 +15,7 @@ export async function rootLoader() {
 
 export async function rootAction() {
   const contact = await createContact();
-  return { contact };
+  return redirect(`/contacts/${contact.id}/edit`);
 }
 
 export default function Root() {
